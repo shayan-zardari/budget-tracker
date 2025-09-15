@@ -1,2 +1,7 @@
 backend/node_modules
 /node_modules
+
+backend/.env.development.local
+backend/.env.production.local
+.env*
+.

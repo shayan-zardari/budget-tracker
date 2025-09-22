@@ -1,23 +1,34 @@
+import jwt from "jsonwebtoken";
 
+import { JWT_SECRET } from "../configurations/env.configure.js";
 
-const jwt = require('jsonwebtoken');
+const verifyToken = (req,res,next) => {
 
-function verifyToken(req,res,next){
-const token = req.head('Authorization');
-if(!token){
-    return res.status(401).json({error:"Access denied"})
+  const token = req.headers.authorization?.split(" ")[1]; // Extract token from "Bearer <token>"
+  
+  try {
+
+    if ( !token ) {
+        return res.status(401).json({
+            success: false,
+            error: "No token provided" 
+        });
+    }
+
+    const decoded = jwt.verify(token, JWT_SECRET); // Verify token
+
+    req.user = { _id: decoded.userId }; // Attach user ID to req.user
+
+    next(); // Proceed to the next middleware/controller
+
+  } catch (error) {
+
+    return res.status(401).json({
+        success: false,
+        error: "Invalid token" 
+    });
+
+  }
 }
-try {
-    const decoded = jwt.verify(token, 'UChqzRkb7y');
-    req.userId = decoded.userId;
-    next();
-    
-} catch (error) {
-    res.status(401).json({error: 'Invalid Token'})
-    
-}
 
-
-}
-
-module.exports= verifyToken;
+export default verifyToken;

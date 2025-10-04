@@ -16,7 +16,7 @@ const expenseController = {
             const expenseDbCreationResponse = await expense.save();
 
             res.status(200).json({
-                succuess: true,
+                success: true,
                 data: {
                     expenseCreationResponse: expenseDbCreationResponse
                 }

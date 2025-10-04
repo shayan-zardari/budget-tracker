@@ -1,5 +1,5 @@
 
-import { DB_CONNECTION_STRING, NODE_ENV } from "./env.configure.js";
+import { DB_CONNECTION_STRING } from "./env.configure.js";
 import mongoose from "mongoose";
 
 const DB_Connect = async () => {

@@ -16,8 +16,8 @@ const verifyToken = (req,res,next) => {
     }
 
     const decoded = jwt.verify(token, JWT_SECRET); // Verify token
-
-    req.user = { _id: decoded.userId }; // Attach user ID to req.user
+    console.log(decoded);
+    req.user = decoded;
 
     next(); // Proceed to the next middleware/controller
 

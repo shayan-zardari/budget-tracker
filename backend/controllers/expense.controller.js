@@ -5,12 +5,13 @@ const expenseController = {
         try {
             const {name, amount} = req.body;
 
-            console.log(req);
+            // console.log(req);
 
             const expense = new Expense({
                 name: name,
                 currency: "$",
                 amount: amount, 
+                user: req.user.userId
             });
 
             const expenseDbCreationResponse = await expense.save();
@@ -33,13 +34,63 @@ const expenseController = {
             });
         }
     },
-    getExpense: async (req, res) =>{
+    getExpenses: async (req, res) => {
+        try {
+            const userId = req.user.userId;
+
+            if (!user) {
+                res.status(401).json({
+                    success: false,
+                    data: {
+                        authenticationError: `No user signed in.`
+                    }
+                });
+            }
+
+            const expenses = await Expense.find({user: userId});
+
+            res.status(200).json({
+                success: true,
+                data: {
+                    expenses
+                }
+            });
+        }
+        catch (error) {
+
+            res.status(400).json({
+                success: false,
+                data: {
+                    error
+                }
+            });
+
+        };
+    },
+    getExpense: async (req, res) => {
+        try {
+            const userId = req.user.userId; 
+
+            if (!user) {
+                res.status(401).json({
+                    success: false,
+                    data: {
+                        authenticationError: `No user signed in.`
+                    }
+                });
+            };
+
+            
+
+        }
+        catch (error) {
+
+        }
+    },
+    updateExpense: async (req, res) => {
 
     },
-    updateExpense: async (req, res) =>{
-
-    },
-    deleteExpense: async (req, res) =>{
+    deleteExpense: async (req, res) => {
 
     }
 }

@@ -6,10 +6,12 @@ const expenseRouter = Router();
 
 expenseRouter.post("/create-expense", expenseController.createExpense)
 
-expenseRouter.get("/get-expense", expenseController.getExpense)
+expenseRouter.get("/get-expenses", expenseController.getExpenses)
 
-expenseRouter.put("/update-expense", expenseController.updateExpense)
+expenseRouter.get("/get-expense/:id", expenseController.getExpenses)
 
-expenseRouter.delete("/delete-expense", expenseController.deleteExpense)
+expenseRouter.put("/update-expense/:id", expenseController.updateExpense)
+
+expenseRouter.delete("/delete-expense/:id", expenseController.deleteExpense)
 
 export default expenseRouter;

@@ -57,13 +57,13 @@ const authController = {
 
             const passwordMatch = await bcrypt.compare(password,user.password);
 
-            console.log("password",passwordMatch);
+            // console.log("password",passwordMatch);
 
             if( !passwordMatch ){
                 return res.status(401).json({error: 'Wrong Email and Password combination.'});
             };
 
-            const token = jwt.sign({user}, JWT_SECRET);
+            const token = jwt.sign({ userId: user._id }, JWT_SECRET);
 
             console.log(`The token is the follwoing: ${token}`);
 

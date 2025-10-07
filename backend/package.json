@@ -1,0 +1,29 @@
+{
+  "name": "personel-budget",
+  "version": "1.0.0",
+  "description": "A personal budget tracking app that allows users to make an account, create expense budgets, both weekly and monthly, and allows the user to track the expenses. The app is a monorepo project that uses MERN stack.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [
+    "budget-tracker",
+    "porfolio-project",
+    "expense-manager",
+    "college-project"
+  ],
+  "author": "Shayan Zardari and Ali Abbas",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.19.0",
+    "mongoose": "^8.18.1",
+    "nodemon": "^3.1.10",
+    "prettier": "^3.6.2"
+  }
+}

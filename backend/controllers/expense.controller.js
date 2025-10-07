@@ -91,6 +91,21 @@ const expenseController = {
 
     },
     deleteExpense: async (req, res) => {
+        try {
+        const userId = req.user.userId; 
+        const expenses = await Expense.find({user: userId});
+        console.log(expenses)
+        res.status(200).json({
+            success:true,
+            data:{expenses}
+
+        })
+            
+        } catch (error) {
+            
+        }
+         
+         //const findExpense
 
     }
 }

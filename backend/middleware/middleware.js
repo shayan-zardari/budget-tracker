@@ -16,7 +16,7 @@ const verifyToken = (req,res,next) => {
     }
 
     const decoded = jwt.verify(token, JWT_SECRET); // Verify token
-    console.log(decoded);
+    //console.log(decoded);
     req.user = decoded;
 
     next(); // Proceed to the next middleware/controller

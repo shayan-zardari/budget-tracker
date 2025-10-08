@@ -37,8 +37,8 @@ const expenseController = {
     getExpenses: async (req, res) => {
         try {
             const userId = req.user.userId;
-
-            if (!user) {
+              
+            if (!userId) {
                 res.status(401).json({
                     success: false,
                     data: {
@@ -48,8 +48,9 @@ const expenseController = {
             }
 
             const expenses = await Expense.find({user: userId});
-
-            res.status(200).json({
+            
+     
+          return res.status(200).json({
                 success: true,
                 data: {
                     expenses
@@ -71,7 +72,7 @@ const expenseController = {
         try {
             const userId = req.user.userId; 
 
-            if (!user) {
+            if (!userId) {
                 res.status(401).json({
                     success: false,
                     data: {
@@ -93,15 +94,30 @@ const expenseController = {
     deleteExpense: async (req, res) => {
         try {
         const userId = req.user.userId; 
-        const expenses = await Expense.find({user: userId});
-        console.log(expenses)
+        const expenseId = req.params.id;
+
+        const expenses = await Expense.findOne({_id:expenseId,user: userId});
+        if(!expenses){
+            return res.status(404).json({
+                success:false,
+                data: {message: "Expense not found"}
+            })
+        }
+        await Expense.deleteOne({_id:expenses})
         res.status(200).json({
             success:true,
-            data:{expenses}
+            data : {message : "Expense deleted successfully"}
+            
 
         })
             
         } catch (error) {
+             res.status(400).json({
+                success: false,
+                data: {
+                    error
+                }
+            });
             
         }
          
